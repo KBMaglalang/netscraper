@@ -24,7 +24,7 @@ export async function setPinnedState(productId: string, state: boolean) {
     // check if the product exists
     if (!results) return null;
 
-    revalidatePath('/');
+    revalidatePath('/', 'layout');
 
     return results;
   } catch (error) {

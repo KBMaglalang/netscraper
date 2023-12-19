@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 // context
 
 // constants and functions
@@ -19,6 +21,8 @@ export async function updateNotificationPrice(productId: string, value: number) 
 
     // check if the product exists
     if (!results) return null;
+
+    revalidatePath(`/products/${productId}`, 'page');
 
     return results;
   } catch (error) {

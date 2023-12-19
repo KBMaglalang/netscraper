@@ -15,7 +15,7 @@ export async function deleteProductById(productId: string) {
     const results = await Product.deleteOne({ _id: productId });
     if (!results || results.deletedCount === 0) return null;
 
-    revalidatePath('/');
+    revalidatePath('/', 'layout');
 
     return results;
   } catch (error) {

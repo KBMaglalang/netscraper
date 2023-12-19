@@ -1,4 +1,5 @@
 import React from 'react';
+import { Suspense } from 'react';
 
 // components
 import { WatchList } from '@/components/WatchList';
@@ -17,7 +18,9 @@ const Home = async () => {
       </section>
 
       {/* watch list */}
-      <WatchList />
+      <Suspense>
+        <WatchList />
+      </Suspense>
     </section>
   );
 };
