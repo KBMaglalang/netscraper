@@ -36,7 +36,7 @@ export const ProductNotificationInput = ({ id, value }: any) => {
   };
 
   return (
-    <div className="flex flex-1 flex-row gap-2">
+    <div className="flex flex-1 flex-row gap-2" data-test="product-notification-price-form">
       <input
         type="number"
         placeholder="Price"

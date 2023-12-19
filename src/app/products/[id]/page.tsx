@@ -53,7 +53,12 @@ const ProductDetails = async ({ params: { id } }: Props) => {
               <div className="flex w-full flex-row space-x-2">
                 <ProductPinned id={id} pinned={product.pinned} />
 
-                <Link href={product.url} target="_blank" className="btn btn-primary flex-1">
+                <Link
+                  data-test="product-visit-button"
+                  href={product.url}
+                  target="_blank"
+                  className="btn btn-primary flex-1"
+                >
                   Visit Product
                 </Link>
 
