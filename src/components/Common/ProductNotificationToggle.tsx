@@ -36,6 +36,7 @@ export const ProductNotificationToggle = ({ id, state }: any) => {
   return (
     <div className="flex flex-row space-x-2">
       <button
+        data-test="product-notification-toggle-button"
         className={`btn  ${toggleState ? `btn-primary` : `btn-error`}`}
         onClick={handleNotificationToggle}
       >

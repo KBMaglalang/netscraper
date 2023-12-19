@@ -39,7 +39,7 @@ export const Searchbar = () => {
   };
 
   return (
-    <form className="flex flex-row space-x-4 py-4" onSubmit={handleSubmit}>
+    <form className="flex flex-row space-x-4 py-4" onSubmit={handleSubmit} data-test="search-form">
       <input
         type="text"
         value={searchPrompt}

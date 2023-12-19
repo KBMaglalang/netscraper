@@ -36,7 +36,11 @@ export const ProductPinned = ({ id, pinned }: any) => {
   };
 
   return (
-    <button className="btn btn-primary" onClick={handlePinnedToggle}>
+    <button
+      data-test="product-pinned-button"
+      className="btn btn-primary"
+      onClick={handlePinnedToggle}
+    >
       {loading ? (
         <span className="loading loading-infinity loading-lg"></span>
       ) : toggleState ? (
