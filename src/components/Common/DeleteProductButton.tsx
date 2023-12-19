@@ -37,7 +37,11 @@ export const DeleteProductButton = ({ id }: Props) => {
   };
 
   return (
-    <button className="btn btn-square btn-error" onClick={(e) => handleDeleteProduct(e, id)}>
+    <button
+      data-test="product-delete-button"
+      className="btn btn-square btn-error"
+      onClick={(e) => handleDeleteProduct(e, id)}
+    >
       <XMarkIcon className="x-8 w-8" />
     </button>
   );

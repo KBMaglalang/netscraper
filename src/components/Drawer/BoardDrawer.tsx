@@ -19,13 +19,22 @@ export async function BoardDrawer() {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* toggle button */}
-        <label htmlFor="my-drawer" className="btn btn-outline drawer-button btn-sm">
+        <label
+          data-test="sidebar-button"
+          htmlFor="my-drawer"
+          className="btn btn-outline drawer-button btn-sm"
+        >
           <Bars4Icon className="h-4 w-4" />
         </label>
       </div>
 
       <div className="drawer-side">
-        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+        <label
+          data-test="sidebar-outside-layer"
+          htmlFor="my-drawer"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
         {/* sidebar */}
 
         <div className="menu flex h-full min-h-full w-80 flex-col overflow-hidden bg-base-200 p-4 text-base-content">
@@ -33,7 +42,7 @@ export async function BoardDrawer() {
           <h2 className="pb-4 text-start text-xl font-medium opacity-50">Watch List</h2>
 
           {/* boards list */}
-          <div className="w-full flex-1 overflow-y-scroll">
+          <div data-test="sidebar-product-list" className="w-full flex-1 overflow-y-scroll">
             {allProducts &&
               allProducts?.map((product) => (
                 <BoardDrawerItem key={product._id} product={product} />

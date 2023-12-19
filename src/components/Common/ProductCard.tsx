@@ -16,6 +16,7 @@ interface Props {
 export const ProductCard = ({ product }: Props) => {
   return (
     <Link
+      data-test={`homepage-product-${product.title}`}
       href={`/products/${product._id}`}
       className="min-h-96 hover:border-primary-500 card w-80 bg-base-100 shadow-xl transition-all hover:shadow-2xl"
     >
