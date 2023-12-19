@@ -12,7 +12,8 @@
     "format:fix": "prettier --write --ignore-path .gitignore .",
     "release": "standard-version",
     "release:initial": "standard-version --first-release",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --headless"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
