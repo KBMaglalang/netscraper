@@ -10,12 +10,43 @@ import {
   DeleteProductButton,
   ProductPinned,
 } from '@/components/Common';
+import { Graph } from '@/components/Graph';
 
 // context
 
-// constants and functions
+// constants and functions4
 import { Product } from '@/types';
 import { getProductById } from '@/lib/actions';
+const data = [
+  {
+    name: 'Page A',
+    pv: 2400,
+  },
+  {
+    name: 'Page B',
+    pv: 1398,
+  },
+  {
+    name: 'Page C',
+    pv: 9800,
+  },
+  {
+    name: 'Page D',
+    pv: 3908,
+  },
+  {
+    name: 'Page E',
+    pv: 4800,
+  },
+  {
+    name: 'Page F',
+    pv: 3800,
+  },
+  {
+    name: 'Page G',
+    pv: 4300,
+  },
+];
 
 type Props = {
   params: { id: string };
@@ -75,15 +106,11 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                   <ProductNotificationToggle id={id} state={product.notificationEnabled} />
                   <ProductNotificationInput id={id} value={product.notificationPrice} />
                 </div>
+                <Graph productData={data} />
               </div>
             </div>
           </div>
         </div>
-
-        {/* graph */}
-        {/* <div className="flex min-h-screen items-center justify-center rounded-xl bg-slate-50 shadow-lg">
-          graph data
-        </div> */}
       </div>
     </div>
   );
