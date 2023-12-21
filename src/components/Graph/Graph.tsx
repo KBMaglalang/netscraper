@@ -22,8 +22,6 @@ export const Graph = ({ productData }: any) => {
     <div className="flex h-[50vh] w-auto items-center justify-center rounded-xl bg-slate-50 shadow-lg">
       <ResponsiveContainer>
         <LineChart
-          width={700}
-          height={300}
           data={productData}
           margin={{
             top: 20,
@@ -33,10 +31,10 @@ export const Graph = ({ productData }: any) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <XAxis dataKey="name" hide />
+          <YAxis tickCount={10} />
           <Tooltip />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 10 }} />
+          <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 10 }} />
         </LineChart>
       </ResponsiveContainer>
     </div>

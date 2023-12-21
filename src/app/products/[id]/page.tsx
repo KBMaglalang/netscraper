@@ -17,6 +17,7 @@ import { Graph } from '@/components/Graph';
 // constants and functions4
 import { Product } from '@/types';
 import { getProductById } from '@/lib/actions';
+import { formatDataForGraph } from '@/lib/utilities';
 const data = [
   {
     name: 'Page A',
@@ -58,6 +59,8 @@ const ProductDetails = async ({ params: { id } }: Props) => {
 
   // return to homepage if product is not found
   if (!product) redirect('/');
+
+  const formattedPriceData = formatDataForGraph(product);
 
   return (
     <div className="container mx-auto my-4 px-4">
@@ -106,7 +109,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                   <ProductNotificationToggle id={id} state={product.notificationEnabled} />
                   <ProductNotificationInput id={id} value={product.notificationPrice} />
                 </div>
-                <Graph productData={data} />
+                <Graph productData={formattedPriceData} />
               </div>
             </div>
           </div>
