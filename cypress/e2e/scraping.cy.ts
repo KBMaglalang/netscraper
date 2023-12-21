@@ -45,6 +45,7 @@ describe('scraping spec', () => {
     // navigate to scraped product
     cy.get('[data-test="homepage-product-list"]').contains('Dutch Oven').click();
     cy.get('[data-test="product-delete-button"]').click();
+    cy.wait(10000); // 10 second wait
     cy.get('[data-test="homepage-product-list"]').should('not.contain', 'Dutch Oven');
   });
 });
