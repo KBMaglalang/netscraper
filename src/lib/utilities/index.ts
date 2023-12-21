@@ -7,3 +7,4 @@ export * from './getLowestPrice';
 export * from './getAveragePrice';
 export * from './getEmailNotifType';
 export * from './formatNumber';
+export * from './formatDataForGraph';

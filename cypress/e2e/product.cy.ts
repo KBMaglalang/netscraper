@@ -25,6 +25,7 @@ describe('product testing', () => {
 
     // navigate to scraped product
     cy.get('[data-test="homepage-product-list"]').contains('Dutch Oven').click();
+    cy.wait(10000); // 10 second wait
 
     // testing pinned function
     cy.get('[data-test="product-pinned-button"]').click();
