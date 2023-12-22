@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "${APP_PORT}:3000"
+    environment:
+      - MONGODB_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:${MONGO_PORT}/?retryWrites=true&w=majority
+      - BRIGHT_DATA_USERNAME=${BRIGHT_DATA_USERNAME}
+      - BRIGHT_DATA_PASSWORD=${BRIGHT_DATA_PASSWORD}
+      - BRIGHT_DATA_PORT=${BRIGHT_DATA_PORT}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+    command: ["pnpm", "dev"]
+
+  mongo:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongodb_data_netscraper:/data/db
+    ports:
+      - "${MONGO_PORT}:27017"
+
+volumes:
+  mongodb_data_netscraper:
