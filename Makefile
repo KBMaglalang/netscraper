@@ -2,6 +2,7 @@
 
 # Extract version from package.json
 VERSION := $(shell node -p "require('./package.json').version")
+NAME := $(shell node -p "require('./package.json').name")
 
 # Default target executed when no arguments are given to make.
 default_target: all
@@ -23,13 +24,13 @@ version:
 
 # Target for building the Docker image
 build:
-	docker build -t netscraper:$(VERSION) .
+	docker build -t $(NAME):$(VERSION) .
 
 # Target for running the Docker container in development mode
 dev:
-	docker run -p 3000:3000 -v $(shell pwd):/usr/src/app netscraper:$(VERSION)
+	docker run -p 3000:3000 -v $(shell pwd):/usr/src/app $(NAME):$(VERSION)
 
 # Target for running the Docker container
 run:
-	docker run -p 3000:3000 netscraper:$(VERSION)
+	docker run -p 3000:3000 $(NAME):$(VERSION)
 
