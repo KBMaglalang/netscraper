@@ -8,7 +8,7 @@ import supportsColor from 'supports-color';
 // context
 
 // constants and functions
-import { connectToDB } from '@/config/mongoose/mongoose';
+import connectToDB from '@/config/mongoose/mongoose';
 import { scrapeAmazonProduct } from '../scraper';
 import Product from '../models/product.model';
 import { getAveragePrice, getHighestPrice, getLowestPrice } from '../utilities';
@@ -17,7 +17,7 @@ export async function scrapeAndStoreProduct(productUrl: string) {
   if (!productUrl) return;
 
   try {
-    connectToDB();
+    await connectToDB();
 
     const scrapedProduct = await scrapeAmazonProduct(productUrl);
     if (!scrapedProduct) return;

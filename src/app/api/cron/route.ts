@@ -6,7 +6,7 @@ import {
   getAveragePrice,
   getEmailNotifType,
 } from '@/lib/utilities';
-import { connectToDB } from '@/config/mongoose/mongoose';
+import connectToDB from '@/config/mongoose/mongoose';
 import Product from '@/lib/models/product.model';
 import { scrapeAmazonProduct } from '@/lib/scraper';
 import { generateEmailBody, sendEmail } from '@/lib/nodemailer';
@@ -18,14 +18,15 @@ export const revalidate = 0;
 
 export async function GET(request: Request) {
   try {
-    connectToDB();
+    await connectToDB();
 
-    const products = await Product.find({});
+    const products = await Product.find({}).lean();
 
     if (!products) throw new Error('No product fetched');
 
     // ======================== 1 SCRAPE LATEST PRODUCT DETAILS & UPDATE DB
     const updatedProducts = await Promise.all(
+      // await Promise.all(
       products.map(async (currentProduct) => {
         // Scrape product
         const scrapedProduct = await scrapeAmazonProduct(currentProduct.url);
@@ -53,23 +54,29 @@ export async function GET(request: Request) {
             url: product.url,
           },
           product
-        );
+        ).lean();
 
-        // ======================== 2 CHECK EACH PRODUCT'S STATUS & SEND EMAIL ACCORDINGLY
-        const emailNotifType = getEmailNotifType(scrapedProduct, currentProduct);
+        updatedProduct._id = updatedProduct._id!.toString();
+        updatedProduct.priceHistory = updatedProduct.priceHistory.map((item: any) => {
+          item._id = item._id!.toString();
+          return item;
+        });
 
-        if (emailNotifType && updatedProduct.users.length > 0) {
-          const productInfo = {
-            title: updatedProduct.title,
-            url: updatedProduct.url,
-          };
-          // Construct emailContent
-          const emailContent = await generateEmailBody(productInfo, emailNotifType);
-          // Get array of user emails
-          const userEmails = updatedProduct.users.map((user: any) => user.email);
-          // Send email notification
-          await sendEmail(emailContent, userEmails);
-        }
+        // // ======================== 2 CHECK EACH PRODUCT'S STATUS & SEND EMAIL ACCORDINGLY
+        // const emailNotifType = getEmailNotifType(scrapedProduct, currentProduct);
+
+        // if (emailNotifType && updatedProduct.users.length > 0) {
+        //   const productInfo = {
+        //     title: updatedProduct.title,
+        //     url: updatedProduct.url,
+        //   };
+        //   // Construct emailContent
+        //   const emailContent = await generateEmailBody(productInfo, emailNotifType);
+        //   // Get array of user emails
+        //   const userEmails = updatedProduct.users.map((user: any) => user.email);
+        //   // Send email notification
+        //   await sendEmail(emailContent, userEmails);
+        // }
 
         return updatedProduct;
       })

@@ -1,5 +1,7 @@
 export type PriceHistoryItem = {
+  _id?: string;
   price: number;
+  date: Date;
 };
 
 export type User = {

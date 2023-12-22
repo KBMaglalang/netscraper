@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 let isConnected = false; // Variable to track the connection status
 
-export const connectToDB = async () => {
+const connectToDB = async () => {
   mongoose.set('strictQuery', true);
 
   if (!process.env.MONGODB_URI) return console.log('MONGODB: MONGODB_URI is not defined');
@@ -19,3 +19,5 @@ export const connectToDB = async () => {
     console.log(error);
   }
 };
+
+export default connectToDB;
