@@ -21,12 +21,10 @@ export const ProductNotificationInput = ({ id, value }: any) => {
       setLoading(true);
 
       const response = await updateNotificationPrice(id, parseFloat(inputValue));
-
       if (!response) {
         toast.error('Unable to update notification price');
         return;
       }
-
       toast.success('Notification price updated');
     } catch (error) {
       toast.error('Unable to update notification price');

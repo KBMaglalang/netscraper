@@ -6,11 +6,11 @@
 
 // constants and functions
 import Product from '../models/product.model';
-import { connectToDB } from '@/config/mongoose/mongoose';
+import connectToDB from '@/config/mongoose/mongoose';
 
 export async function getSimilarProducts(productId: string) {
   try {
-    connectToDB();
+    await connectToDB();
 
     const currentProduct = await Product.findById(productId);
 

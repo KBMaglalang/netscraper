@@ -6,11 +6,11 @@ import { revalidatePath } from 'next/cache';
 
 // constants and functions
 import Product from '../models/product.model';
-import { connectToDB } from '@/config/mongoose/mongoose';
+import connectToDB from '@/config/mongoose/mongoose';
 
 export async function updateNotificationPrice(productId: string, value: number) {
   try {
-    connectToDB();
+    await connectToDB();
 
     // update the notification price of the product
     const results = await Product.findOneAndUpdate(
@@ -24,7 +24,7 @@ export async function updateNotificationPrice(productId: string, value: number) 
 
     revalidatePath(`/products/${productId}`, 'page');
 
-    return results;
+    return true;
   } catch (error) {
     console.log(error);
   }

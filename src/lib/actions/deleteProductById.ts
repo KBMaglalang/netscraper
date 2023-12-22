@@ -6,11 +6,11 @@ import { revalidatePath } from 'next/cache';
 
 // constants and functions
 import Product from '../models/product.model';
-import { connectToDB } from '@/config/mongoose/mongoose';
+import connectToDB from '@/config/mongoose/mongoose';
 
 export async function deleteProductById(productId: string) {
   try {
-    connectToDB();
+    await connectToDB();
 
     const results = await Product.deleteOne({ _id: productId });
     if (!results || results.deletedCount === 0) return null;

@@ -6,11 +6,11 @@
 
 // constants and functions
 import Product from '../models/product.model';
-import { connectToDB } from '@/config/mongoose/mongoose';
+import connectToDB from '@/config/mongoose/mongoose';
 
 export async function getAllProducts() {
   try {
-    connectToDB();
+    await connectToDB();
 
     const products = await Product.find();
 
