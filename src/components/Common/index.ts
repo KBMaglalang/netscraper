@@ -4,3 +4,4 @@ export * from './ProductStatsInfo';
 export * from './ProductCard';
 export * from './DeleteProductButton';
 export * from './ProductPinned';
+export * from './ButtonRefreshAll';

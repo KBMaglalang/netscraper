@@ -19,7 +19,7 @@ import {
 
 export const Graph = ({ productData }: any) => {
   return (
-    <div className="flex h-[50vh] w-auto items-center justify-center rounded-xl bg-slate-50 shadow-lg">
+    <div className="mt-4 flex h-[50vh] w-auto items-center justify-center rounded-xl bg-slate-50 shadow-lg">
       <ResponsiveContainer>
         <LineChart
           data={productData}

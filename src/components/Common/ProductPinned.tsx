@@ -16,7 +16,7 @@ export const ProductPinned = ({ id, pinned }: any) => {
   const [toggleState, setToggleState] = useState(pinned || false);
   const [loading, setLoading] = useState(false);
 
-  const handlePinnedToggle = async (e: any) => {
+  const handlePinnedToggle = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     try {
@@ -39,7 +39,7 @@ export const ProductPinned = ({ id, pinned }: any) => {
     <button
       data-test="product-pinned-button"
       className="btn btn-primary"
-      onClick={handlePinnedToggle}
+      onClick={(e) => handlePinnedToggle}
     >
       {loading ? (
         <span className="loading loading-infinity loading-lg"></span>
