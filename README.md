@@ -11,7 +11,6 @@ NetScraper is a cutting-edge web scraping solution developed using Next.js, tail
 - Data Management: Robust back-end architecture using MongoDB and Mongoose for effective data storage and retrieval.
 - Customizable Scraping: Users can specify parameters for scraping, allowing for targeted data extraction.
 - Real-Time Notifications: Implements React Hot Toast for immediate feedback during web scraping operations.
-- Email Integration: Features Nodemailer for sending notifications or reports via email.
 - Comprehensive Date Handling: Utilizes Moment.js for handling and displaying dates and times effectively.
 - Responsive Design: Ensures a seamless experience across different devices and screen sizes.
 
@@ -26,7 +25,6 @@ NetScraper is a cutting-edge web scraping solution developed using Next.js, tail
 - Mongoose (v8.0.3): MongoDB object modeling for Node.js.
 - Cheerio (v1.0.0-rc.12): Fast, flexible & lean implementation of core jQuery designed specifically for the server.
 - Axios (v1.6.2): Promise-based HTTP client for making HTTP requests.
-- Nodemailer (v6.9.7): Module for sending emails.
 - Moment.js (v2.29.4): Parse, validate, manipulate, and display dates and times in JavaScript.
 - React Hot Toast (v2.4.1): Smoking hot React notifications.
 - ESLint (v8): Pluggable JavaScript linter.

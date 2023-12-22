@@ -20,8 +20,6 @@ const productSchema = new Schema(
     averagePrice: { type: Number },
     discountRate: { type: Number },
 
-    users: [{ email: { type: String, required: true } }],
-
     notificationPrice: { type: Number, default: 0.0 },
     notificationEnabled: { type: Boolean, default: false },
 
