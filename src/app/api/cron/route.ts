@@ -20,7 +20,7 @@ export async function GET(request: Request) {
   try {
     await connectToDB();
 
-    const products = await Product.find({}).lean();
+    const products = await Product.find({});
 
     if (!products) throw new Error('No product fetched');
 
@@ -54,13 +54,7 @@ export async function GET(request: Request) {
             url: product.url,
           },
           product
-        ).lean();
-
-        updatedProduct._id = updatedProduct._id!.toString();
-        updatedProduct.priceHistory = updatedProduct.priceHistory.map((item: any) => {
-          item._id = item._id!.toString();
-          return item;
-        });
+        );
 
         // // ======================== 2 CHECK EACH PRODUCT'S STATUS & SEND EMAIL ACCORDINGLY
         // const emailNotifType = getEmailNotifType(scrapedProduct, currentProduct);

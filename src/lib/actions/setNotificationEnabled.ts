@@ -19,23 +19,14 @@ export async function setNotificationEnabled(productId: string, state: boolean) 
         notificationEnabled: state,
       },
       { new: true }
-    ).lean();
+    );
 
     // check if the product exists
     if (!results) return null;
 
-    // fix the _id property
-    results._id = results._id.toString();
-
-    // deal with the price history
-    results.priceHistory = results.priceHistory.map((item: any) => {
-      item._id = item._id!.toString();
-      return item;
-    });
-
     revalidatePath(`/products/${productId}`, 'page');
 
-    return results;
+    return true;
   } catch (error) {
     console.log(error);
   }
