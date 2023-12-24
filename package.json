@@ -18,19 +18,23 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@npmcli/package-json": "^5.0.0",
     "axios": "^1.6.2",
     "cheerio": "1.0.0-rc.12",
     "moment": "^2.29.4",
     "mongoose": "^8.0.3",
     "next": "14.0.3",
+    "nodemailer": "^6.9.7",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "recharts": "^2.10.3",
+    "sharp": "^0.33.1",
     "supports-color": "^9.4.0"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.14",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",

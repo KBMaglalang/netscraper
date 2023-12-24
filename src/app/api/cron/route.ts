@@ -4,6 +4,7 @@ import { getLowestPrice, getHighestPrice, getAveragePrice } from '@/lib/utilitie
 import connectToDB from '@/config/mongoose/mongoose';
 import Product from '@/lib/models/product.model';
 import { scrapeAmazonProduct } from '@/lib/scraper';
+import sendEmail from '@/lib/actions/sendEmail';
 
 // route settings
 export const maxDuration = 10; // This function can run for a maximum of 300 seconds
@@ -12,6 +13,8 @@ export const revalidate = 0;
 
 export async function GET(request: Request) {
   try {
+    await sendEmail();
+
     await connectToDB();
 
     const products = await Product.find({});

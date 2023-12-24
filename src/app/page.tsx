@@ -9,6 +9,8 @@ import { Searchbar } from '@/components/Searchbar';
 
 // constants and functions
 
+export const revalidate = 60;
+
 const Home = async () => {
   return (
     <section className="my-4 flex flex-1 flex-col px-4">

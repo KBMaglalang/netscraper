@@ -1,5 +1,7 @@
 'use server';
 
+import { cache } from 'react';
+
 // components
 
 // context
@@ -8,7 +10,7 @@
 import Product from '../models/product.model';
 import connectToDB from '@/config/mongoose/mongoose';
 
-export async function getAllProducts() {
+export const getAllProducts = cache(async () => {
   try {
     await connectToDB();
 
@@ -23,4 +25,4 @@ export async function getAllProducts() {
   } catch (error) {
     console.log(error);
   }
-}
+});
