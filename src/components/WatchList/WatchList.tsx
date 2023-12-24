@@ -8,6 +8,8 @@ import { ProductCard } from '../Common/ProductCard';
 // constants and functions
 import { getAllProducts } from '@/lib/actions';
 
+export const revalidate = 60;
+
 export const WatchList = async () => {
   const allProducts = await getAllProducts();
 
