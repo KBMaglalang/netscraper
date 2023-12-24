@@ -13,15 +13,13 @@ export const revalidate = 0;
 
 export async function GET(request: Request) {
   try {
-    await sendEmail();
-
     await connectToDB();
 
     const products = await Product.find({});
 
     if (!products) throw new Error('No product fetched');
 
-    // ======================== 1 SCRAPE LATEST PRODUCT DETAILS & UPDATE DB
+    // update scraped products
     const updatedProducts = await Promise.all(
       // await Promise.all(
       products.map(async (currentProduct) => {
@@ -41,6 +39,9 @@ export async function GET(request: Request) {
           lowestPrice: getLowestPrice(updatedPriceHistory),
           highestPrice: getHighestPrice(updatedPriceHistory),
           averagePrice: getAveragePrice(updatedPriceHistory),
+          notificationEnabled: currentProduct.notificationEnabled,
+          notificationPrice: currentProduct.notificationPrice,
+          pinned: currentProduct.pinned,
         };
 
         // Update Products in DB
@@ -48,6 +49,24 @@ export async function GET(request: Request) {
         return updatedProduct;
       })
     );
+
+    // check if api key is provided
+    if (process.env.SENDGRID_API_KEY) {
+      if (!process.env.SENDGRID_EMAIL_TO) throw new Error('No email provided');
+
+      // check if notification of the product is enabled
+      const productsToNotify = updatedProducts.filter((product) => product.notificationEnabled);
+
+      // check if there is a price drop between the currentPrice and originalPrice
+      const productsWithPriceDrop = productsToNotify.filter(
+        (product) =>
+          product.currentPrice <= product.notificationPrice ||
+          product.currentPrice <= product.lowestPrice
+      );
+
+      // send the email
+      await sendEmail(productsWithPriceDrop);
+    }
 
     return NextResponse.json({
       message: 'Ok',
