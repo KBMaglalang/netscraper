@@ -36,7 +36,7 @@ services:
       - mongo
     networks:
       - app_network
-    command: ["pnpm", "dev"]
+
 
 networks:
   app_network:

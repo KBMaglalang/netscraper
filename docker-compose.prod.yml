@@ -16,7 +16,7 @@ services:
       context: .
       dockerfile: Dockerfile.prod
     ports:
-      - "3000:3000" # Make sure this port is secure and appropriate for your local setup
+      - "${APP_PORT}:3000" # Make sure this port is secure and appropriate for your local setup
     environment:
       - MONGODB_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/?retryWrites=true&w=majority
       - BRIGHT_DATA_USERNAME=${BRIGHT_DATA_USERNAME}
