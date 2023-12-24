@@ -1,7 +1,7 @@
 # Makefile
 
 # Define the Docker Compose file name
-COMPOSE_FILE := docker-compose.development.yml
+COMPOSE_FILE := docker-compose.dev.yml
 
 # Default target executed when no arguments are given to make.
 default_target: rebuild
