@@ -16,7 +16,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.development
+      dockerfile: Dockerfile.dev
     ports:
       - "${APP_PORT}:3000"
     environment:
