@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest # Use a specific version for stability
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:3000" # Make sure this port is secure and appropriate for your local setup
+    environment:
+      - MONGODB_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/?retryWrites=true&w=majority
+      - BRIGHT_DATA_USERNAME=${BRIGHT_DATA_USERNAME}
+      - BRIGHT_DATA_PASSWORD=${BRIGHT_DATA_PASSWORD}
+      - BRIGHT_DATA_PORT=${BRIGHT_DATA_PORT}
+      - SENDGRID_EMAIL_FROM=${SENDGRID_EMAIL_FROM}
+      - SENDGRID_EMAIL_TO=${SENDGRID_EMAIL_TO}
+      - SENDGRID_API_USER=${SENDGRID_API_USER}
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - SENDGRID_API_HOST=${SENDGRID_API_HOST}
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+    networks:
+      - app_network
+    restart: unless-stopped
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
