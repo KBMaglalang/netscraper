@@ -1,9 +1,5 @@
 version: '3.8'
 
-networks:
-  app_network:
-    driver: bridge
-
 services:
   mongo:
     image: mongo:latest
@@ -18,7 +14,9 @@ services:
       - app_network
 
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.development
     ports:
       - "${APP_PORT}:3000"
     environment:
@@ -39,6 +37,10 @@ services:
     networks:
       - app_network
     command: ["pnpm", "dev"]
+
+networks:
+  app_network:
+    driver: bridge
 
 volumes:
   mongodb_data:
